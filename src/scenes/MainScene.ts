@@ -1,4 +1,5 @@
 import { Scene } from "phaser";
+import CardStack from "../objects/CardStack";
 
 class MainScene extends Scene {
   constructor() {
@@ -45,29 +46,50 @@ class MainScene extends Scene {
       "a-hearts",
     ];
 
-    this.add.text(50, 200, cards.length.toString());
-    const cardRubashka = this.add.image(60, 270, "rubashka").setScale(0.5);
-    const cardRubashka1 = this.add.image(60, 270, "rubashka").setScale(0.5);
+    const cardStack: CardStack = new CardStack(
+      this,
+      70,
+      300,
+      cards,
+      "rubashka"
+    );
 
-    const playerOnePos = { x: 200, y: 100 };
-    const playerTwoPos = { x: 200, y: 400 };
+    const playerOnePos = { x: 200, y: 400, isDrop: false };
+    const playerTwoPos = { x: 200, y: 100, isDrop: false };
 
-    for (let i = 0; i < 4; i++) {
-      const cardd = this.add.image(60, 270, cards[i]).setScale(0.6);
-      this.tweens.add({
-        targets: cardd,
-        props: {
-          x: { value: playerTwoPos.x, duration: 700 },
-          y: { value: playerTwoPos.y, duration: 700 },
-        },
-        ease: "Linear",
-        delay: 500,
-      });
-      playerTwoPos.x += 100;
-      setTimeout(() => {
-        console.log(1);
-      }, 1000);
-    }
+    //   for (let i = 0; i < 8; i++) {
+    //     const cardd = this.add.image(60, 270, cards[i]).setScale(0.6);
+    //     if (playerOnePos.isDrop === false) {
+    //       this.tweens.add({
+    //         targets: cardd,
+    //         props: {
+    //           x: { value: playerOnePos.x, duration: 700 },
+    //           y: { value: playerOnePos.y, duration: 700 },
+    //         },
+    //         ease: "Linear",
+    //         delay: 500 * i,
+    //       });
+    //       playerOnePos.isDrop = true;
+    //       playerTwoPos.isDrop = false;
+    //       playerOnePos.x += 100;
+    //       cardLength -= 1;
+    //       cardLengthText.setText(cardLength.toString());
+    //     } else if (playerTwoPos.isDrop === false) {
+    //       this.tweens.add({
+    //         targets: cardd,
+    //         props: {
+    //           x: { value: playerTwoPos.x, duration: 700 },
+    //           y: { value: playerTwoPos.y, duration: 700 },
+    //         },
+    //         ease: "Linear",
+    //         delay: 500 * i,
+    //       });
+    //       playerTwoPos.isDrop = true;
+    //       playerOnePos.isDrop = false;
+    //       playerTwoPos.x += 100;
+    //       cardLengthText.setText(cardLength.toString());
+    //     }
+    //   }
   }
 }
 
